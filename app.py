@@ -64,9 +64,9 @@ filename.close()
 def make_predictions(listofargs, Threshold):
     try:
         # the order of the arguments must match the order of the features
-        df = pd.DataFrame(columns=features)
+        df = pd.DataFrame(columns=features) 
         df.loc[0] = listofargs
-
+        
         # convert arguments from integers to floats:
         for var in ['Credit_History', 'LoanAmount', 'Loan_Amount_Term', 'ApplicantIncome', 'CoapplicantIncome']:
             df[var]=int(df[var])
@@ -88,8 +88,8 @@ def make_predictions(listofargs, Threshold):
         ln_total_income_raw = np.log(int(df['ApplicantIncome']) + int(df['CoapplicantIncome']))
         ln_LoanAmount_raw = np.log(1000*df['LoanAmount'])
         df['ln_monthly_return'] = ss_scaler1.transform(np.array(ln_monthly_return_raw).reshape(-1, 1))
-        df['ln_total_income'] = ss_scaler2.transform(np.array(ln_total_income_raw).reshape(-1, 1))
-        df['ln_LoanAmount'] = ss_scaler3.transform(np.array(ln_LoanAmount_raw).reshape(-1, 1))
+        df['ln_total_income'] = ss_scaler2.transform(np.array(ln_total_income_raw).reshape(-1, 1)) 
+        df['ln_LoanAmount'] = ss_scaler3.transform(np.array(ln_LoanAmount_raw).reshape(-1, 1)) 
 
         # drop & rearrange the columns in the order expected by your trained model!
         #df=df[['Gender', 'Education', 'Self_Employed', 'Credit_History',
@@ -106,7 +106,8 @@ def make_predictions(listofargs, Threshold):
         approval_func = lambda y: 'Approved' if raw_approval_prob>Threshold else 'Denied'
         formatted_denial_prob = "{:,.1f}%".format(100*prob[0][0])
         formatted_approval_prob = "{:,.1f}%".format(100*prob[0][1])
-        return approval_func(raw_approval_prob), formatted_approval_prob, formatted_denial_prob        # return list(df.columns), list(df.columns), str(df.head().values)
+        return approval_func(raw_approval_prob), formatted_approval_prob, formatted_denial_prob
+
     except:
         return 'Invalid inputs','Invalid inputs','Invalid inputs'
 
@@ -115,7 +116,7 @@ def make_predictions(listofargs, Threshold):
 
 ## FUNCTION FOR VISUALIZATION
 def make_loans_cube(*args):
-    newdata=pd.DataFrame([args[:9]], columns=features)
+    newdata=pd.DataFrame(args, columns=features)
     newdata['Combined_Income']=newdata['ApplicantIncome'] + newdata['CoapplicantIncome']
 
     trace0=go.Scatter3d(
@@ -125,7 +126,7 @@ def make_loans_cube(*args):
         name='Approved',
         mode='markers',
         text = list(zip(
-            ["Credit: {}".format(x) for x in approved['Credit_History']],
+            ["Credit: {}".format(x) for x in approved['Credit_History']], 
             ["<br>Education: {}".format(x) for x in approved['Education']],
             ["<br>Property Area: {}".format(x) for x in approved['Property_Area']],
             #["<br>Gender: {}".format(x) for x in approved['Gender']],
@@ -147,7 +148,7 @@ def make_loans_cube(*args):
         name='Denied',
         mode='markers',
         text = list(zip(
-            ["Credit: {}".format(x) for x in denied['Credit_History']],
+            ["Credit: {}".format(x) for x in denied['Credit_History']], 
             ["<br>Education: {}".format(x) for x in denied['Education']],
             ["<br>Property Area: {}".format(x) for x in denied['Property_Area']],
             #["<br>Gender: {}".format(x) for x in denied['Gender']],
@@ -295,8 +296,8 @@ app.layout = html.Div(children=[
      Input(component_id='submit-val', component_property='n_clicks'),
     )
 def func(*args):
-    listofargs=[arg for arg in args[:9]]
-    return make_predictions(listofargs, args[9])
+    listofargs=[arg for arg in args[:8]]
+    return make_predictions(listofargs, args[8])
 
 
 ######### Define Callback: Visualization
