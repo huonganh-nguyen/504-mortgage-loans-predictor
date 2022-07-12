@@ -36,7 +36,7 @@ denied=pd.read_csv('model_components/denied_loans.csv')
 #filename = open('model_components/loan_approval_rf_model.pkl', 'rb')
 #rf = pickle.load(filename)
 #filename.close()
-# random forest model
+# logistic regression model
 filename = open('model_components/loan_approval_lr_model.pkl', 'rb')
 lr = pickle.load(filename)
 filename.close()
@@ -127,7 +127,7 @@ def make_loans_cube(*args):
             ["Credit: {}".format(x) for x in approved['Credit_History']],
             ["<br>Education: {}".format(x) for x in approved['Education']],
             ["<br>Property Area: {}".format(x) for x in approved['Property_Area']],
-            #["<br>Gender: {}".format(x) for x in approved['Gender']],
+            ["<br>Gender: {}".format(x) for x in approved['Gender']],
             ["<br>Education: {}".format(x) for x in approved['Education']],
             ["<br>Self-Employed: {}".format(x) for x in approved['Self_Employed']]
                 )) ,
@@ -149,7 +149,7 @@ def make_loans_cube(*args):
             ["Credit: {}".format(x) for x in denied['Credit_History']],
             ["<br>Education: {}".format(x) for x in denied['Education']],
             ["<br>Property Area: {}".format(x) for x in denied['Property_Area']],
-            #["<br>Gender: {}".format(x) for x in denied['Gender']],
+            ["<br>Gender: {}".format(x) for x in denied['Gender']],
             ["<br>Education: {}".format(x) for x in denied['Education']],
             ["<br>Self-Employed: {}".format(x) for x in denied['Self_Employed']]
                 )) ,
@@ -171,7 +171,7 @@ def make_loans_cube(*args):
             ["Credit: {} ".format(x) for x in newdata['Credit_History']],
             ["<br>Education: {} ".format(x) for x in newdata['Education']],
             ["<br>Property Area: {}".format(x) for x in newdata['Property_Area']],
-            #["<br>Gender: {}".format(x) for x in newdata['Gender']],
+            ["<br>Gender: {}".format(x) for x in newdata['Gender']],
             ["<br>Education: {}".format(x) for x in newdata['Education']],
             ["<br>Self-Employed: {}".format(x) for x in newdata['Self_Employed']]
                 )) ,
