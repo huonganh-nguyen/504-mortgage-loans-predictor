@@ -22,7 +22,7 @@ features = ['Credit_History',
 'ApplicantIncome',
 'CoapplicantIncome',
  'Property_Area',
- #'Gender',
+ 'Gender',
  'Education',
   'Self_Employed'
  ]
