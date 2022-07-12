@@ -22,7 +22,7 @@ features = ['Credit_History',
 'ApplicantIncome',
 'CoapplicantIncome',
  'Property_Area',
- 'Gender',
+ #'Gender',
  'Education',
   'Self_Employed'
  ]
@@ -99,6 +99,7 @@ def make_predictions(listofargs, Threshold):
            'Property_Area_Semiurban', 'Property_Area_Urban', 'Property_Area_Rural', 'ln_monthly_return',
            'ln_total_income', 'ln_LoanAmount']]
 
+        #prob = rf.predict_proba(df)
         prob = lr.predict_proba(df)
         raw_approval_prob=prob[0][1]
         Threshold=Threshold*.01
@@ -127,7 +128,7 @@ def make_loans_cube(*args):
             ["Credit: {}".format(x) for x in approved['Credit_History']],
             ["<br>Education: {}".format(x) for x in approved['Education']],
             ["<br>Property Area: {}".format(x) for x in approved['Property_Area']],
-            ["<br>Gender: {}".format(x) for x in approved['Gender']],
+            #["<br>Gender: {}".format(x) for x in approved['Gender']],
             ["<br>Education: {}".format(x) for x in approved['Education']],
             ["<br>Self-Employed: {}".format(x) for x in approved['Self_Employed']]
                 )) ,
@@ -149,7 +150,7 @@ def make_loans_cube(*args):
             ["Credit: {}".format(x) for x in denied['Credit_History']],
             ["<br>Education: {}".format(x) for x in denied['Education']],
             ["<br>Property Area: {}".format(x) for x in denied['Property_Area']],
-            ["<br>Gender: {}".format(x) for x in denied['Gender']],
+            #["<br>Gender: {}".format(x) for x in denied['Gender']],
             ["<br>Education: {}".format(x) for x in denied['Education']],
             ["<br>Self-Employed: {}".format(x) for x in denied['Self_Employed']]
                 )) ,
@@ -171,7 +172,7 @@ def make_loans_cube(*args):
             ["Credit: {} ".format(x) for x in newdata['Credit_History']],
             ["<br>Education: {} ".format(x) for x in newdata['Education']],
             ["<br>Property Area: {}".format(x) for x in newdata['Property_Area']],
-            ["<br>Gender: {}".format(x) for x in newdata['Gender']],
+            #["<br>Gender: {}".format(x) for x in newdata['Gender']],
             ["<br>Education: {}".format(x) for x in newdata['Education']],
             ["<br>Self-Employed: {}".format(x) for x in newdata['Self_Employed']]
                 )) ,
